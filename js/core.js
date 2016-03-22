@@ -21,6 +21,7 @@ var asdf = function () {
     }
 
     //
+    var asdf = {};
     var PAGE_NAME = "data-page",
         PAGE_CLASS = "app-page";
 
@@ -32,7 +33,7 @@ var asdf = function () {
 
     var readyRE = /complete|loaded|interactive/;
 
-    var asdf = {};
+
 
     /**
      * 框架配置
@@ -260,6 +261,6 @@ var asdf = function () {
         return loadPage(pageName, args, options, callback);
     };
 
-
+    Object.freeze(asdf);
     return asdf;
 }();

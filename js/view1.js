@@ -7,4 +7,6 @@ asdf.controller("view1", function(page){
     var txt = document.createElement("div");
     txt.nodeValue = "index page append.";
     page.appendChild(txt);
+
+
 });
