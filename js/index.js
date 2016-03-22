@@ -1,8 +1,11 @@
 /**
  * Created by xeonwell on 2016/3/22.
  */
-asdf.controller("index", function () {
+asdf.controller("index", function (page) {
     console.log("index");
+    var txt = document.createElement("div");
+    txt.innerHTML = "index page append.";
+    page.querySelector(".container").appendChild(txt);
     this.aa = 3;
 
     return {
