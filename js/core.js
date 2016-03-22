@@ -82,7 +82,8 @@ var asdf = function () {
 
 
     var pageStack = [],
-        currentNode, parentNode,
+        currentNode,
+        parentNode,
         pages = {},
         controllers = {};
 
@@ -161,7 +162,7 @@ var asdf = function () {
     function loadPage(pageName, args, options, callback) {
         if (!hasPage(pageName)) return false;
         var oldNode = currentNode;
-        currentNode = pages[pageName].cloneNode(true);
+        currentNode = clonePage(pageName);
         processPage(currentNode);
         var context = {options: options, callback: callback};
         var controller = controllers[pageName];
@@ -192,10 +193,35 @@ var asdf = function () {
     }
 
     /**
-     *
+     * process some special tag & properties
      * @param page
      */
     function processPage(page) {
+
+    }
+
+    /**
+     *
+     * @param {String} [pageName]
+     */
+    function backPage(pageName) {
+        if (pageStack.length <= 1)
+            return;
+
+        var historyBack = 0;
+        var oldNode = currentNode;
+        if (typeof pageName === 'undefined'){
+            historyBack = 1;
+        }
+
+        for (var i = 0; i < historyBack; i++) {
+            var currentStack = pageStack.pop();
+            var vm = currentStack[5];
+            if (vm) vm.$destroy();
+        }
+        currentNode = pageStack[pageStack.length - 1][1];
+        oldNode.parentNode.replaceChild(currentNode, oldNode);
+
 
     }
 
@@ -217,6 +243,14 @@ var asdf = function () {
             addController(pageName, controller);
         }
     };
+    /**
+     *
+     * @param pageName
+     * @param args
+     * @param options
+     * @param callback
+     * @returns {boolean}
+     */
     asdf.load = function (pageName, args, options, callback) {
         if (typeof pageName !== 'string') {
             throw TypeError('page name must be a string, got ' + pageName);
@@ -259,6 +293,13 @@ var asdf = function () {
         }
 
         return loadPage(pageName, args, options, callback);
+    };
+    /**
+     * back to previous page
+     * @param {String|Number} [pageName]
+     */
+    asdf.back = function(pageName){
+        backPage(pageName);
     };
 
     Object.freeze(asdf);

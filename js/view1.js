@@ -8,5 +8,15 @@ asdf.controller("view1", function(page){
     txt.nodeValue = "index page append.";
     page.appendChild(txt);
 
+    return {
+        destroyed:function(){
+            console.log("destroyed");
+        },
+        methods:{
+            jumpback:function(){
+                asdf.back();
+            }
 
+        }
+    }
 });

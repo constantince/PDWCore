@@ -6,11 +6,11 @@ asdf.controller("index", function (page) {
     var txt = document.createElement("div");
     txt.innerHTML = "index page append.";
     page.querySelector(".container").appendChild(txt);
-    this.aa = 3;
+    //this.aa = 3;
 
     return {
         created: function () {
-            console.log("jkjkjkj");
+            console.log("created");
         },
         data: {
             message: "hello world"
