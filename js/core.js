@@ -164,18 +164,15 @@ var asdf = function () {
         processPage(currentNode);
         var context = {options: options, callback: callback};
         var controller = controllers[pageName];
-        var vueObj;
+        var vueObj, resultObj;
 
         if (controller){
-            controller.call(context, currentNode, args);
+            resultObj = controller.call(context, currentNode, args);
         }
-        if (typeof context.data === 'object') {
-            vueObj = new Vue({
-                el: currentNode,
-                data: context.data,
-                methods: context.methods
-            });
-            delete context.data;
+        if (resultObj && typeof resultObj === 'object') {
+            if (!resultObj.el)
+                resultObj.el = currentNode;
+            vueObj = new Vue(resultObj);
         }
         pageStack.push([
             pageName,
