@@ -1,0 +1,40 @@
+body {
+    font-size:20px;
+    width:100%;
+    height:100%;
+    overflow: hidden;
+}
+section.app-page {
+    height: 100%;
+    width:100%;
+    overflow: hidden;
+    position: absolute;
+    font-size:0.8rem;
+}
+section.app-page>* {
+    width:100%;
+}
+section.app-page > header {
+    background-color: #ccc;
+    height:3rem;
+    z-index: 1;
+    position: relative;
+}
+
+section.app-page > .container {
+    background-color: #eee;
+    height:100%;
+    position: absolute;
+    left:0; top:0;
+    padding:3rem 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+section.app-page > footer {
+    background-color: #ddd;
+    position: absolute;
+    left:0;
+    bottom:0;
+    height: 3rem;
+}
