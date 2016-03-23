@@ -20,7 +20,9 @@ asdf.controller("index", function (page) {
                 this.message = this.message.split("").reverse().join('');
             },
             jumpnext: function () {
-                asdf.load("view1");
+                asdf.load("view1",{a:"123123"}, {}, function(result){
+                    console.log(JSON.stringify(result));
+                });
             }
         }
     };
